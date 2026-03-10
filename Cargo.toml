@@ -1,0 +1,17 @@
+[package]
+name = "testfftr"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "testfftr"
+path = "src/lib.rs"
+
+[features]
+default = []
+parallel = ["dep:rayon"]
+
+[dependencies]
+libc = "0.2"
+num-complex = "0.4"
+rayon = { version = "1.11", optional = true }

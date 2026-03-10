@@ -1,0 +1,27 @@
+# Rust build artifacts
+/target/
+**/*.rs.bk
+
+# Keep Cargo.lock for binaries; optional for libraries.
+# Uncomment if you prefer ignoring it for this library crate.
+/Cargo.lock
+
+# Python benchmark caches/venvs
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+env/
+
+# macOS
+.DS_Store
+
+# Editors/IDE
+.idea/
+.vscode/
+
+# Local handoff notes (intentionally untracked)
+/DESCENDANT_NOTES.md
+README.md
