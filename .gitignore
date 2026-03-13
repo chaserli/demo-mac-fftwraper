@@ -23,5 +23,4 @@ env/
 .vscode/
 
 # Local handoff notes (intentionally untracked)
-/DESCENDANT_NOTES.md
-README.md
+/AGENTS.md

@@ -1,7 +1,7 @@
 mod common;
 
 use common::{generate_input, max_abs_error, naive_dft_forward, InputKind};
-use testfftr::{AccelerateFFT, AccelerateFftError};
+use testfftr::{AccelerateFFT, AccelerateFFTError};
 
 #[test]
 fn random_input_generation_is_reproducible() {
@@ -13,14 +13,14 @@ fn random_input_generation_is_reproducible() {
 }
 
 #[test]
-fn try_new_handles_non_radix_lengths_without_panic() {
-    let non_radix_lengths = [3usize, 5, 6, 7, 10, 12, 15];
-    for n in non_radix_lengths {
+fn try_new_handles_non_power_of_two_lengths_without_panic() {
+    let lengths = [3usize, 5, 6, 7, 10, 12, 15];
+    for n in lengths {
         match AccelerateFFT::try_new(n) {
             Ok(_) => {}
-            Err(AccelerateFftError::ForwardSetupFailed { n: got }) => assert_eq!(got, n),
-            Err(AccelerateFftError::InverseSetupFailed { n: got }) => assert_eq!(got, n),
-            Err(AccelerateFftError::InvalidLength) => panic!("n={n} should be valid"),
+            Err(AccelerateFFTError::ForwardSetupFailed { n: got }) => assert_eq!(got, n),
+            Err(AccelerateFFTError::InverseSetupFailed { n: got }) => assert_eq!(got, n),
+            Err(AccelerateFFTError::InvalidLength) => panic!("n={n} should be valid"),
         }
     }
 }

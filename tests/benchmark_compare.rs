@@ -394,12 +394,12 @@ fn compare_accelerate_with_scipy_all_ops() {
             }
         }
 
-        for (w, h) in [(64usize, 64usize), (48usize, 32usize)] {
+        for (w, h, iterations) in [(512usize, 512usize, 12usize), (768usize, 512usize, 8usize)] {
             for input in inputs {
                 cases.push(Case {
                     op: BenchOp::Forward2d,
                     input_kind: input,
-                    iterations: 280,
+                    iterations,
                     width: w,
                     height: h,
                     depth: 1,
@@ -409,7 +409,7 @@ fn compare_accelerate_with_scipy_all_ops() {
                 cases.push(Case {
                     op: BenchOp::Inverse2d,
                     input_kind: input,
-                    iterations: 280,
+                    iterations,
                     width: w,
                     height: h,
                     depth: 1,
@@ -419,12 +419,15 @@ fn compare_accelerate_with_scipy_all_ops() {
             }
         }
 
-        for (w, h, d) in [(16usize, 8usize, 8usize)] {
+        for (w, h, d, iterations) in [
+            (64usize, 64usize, 32usize, 6usize),
+            (96usize, 64usize, 32usize, 4usize),
+        ] {
             for input in inputs {
                 cases.push(Case {
                     op: BenchOp::Forward3d,
                     input_kind: input,
-                    iterations: 90,
+                    iterations,
                     width: w,
                     height: h,
                     depth: d,
@@ -434,7 +437,7 @@ fn compare_accelerate_with_scipy_all_ops() {
                 cases.push(Case {
                     op: BenchOp::Inverse3d,
                     input_kind: input,
-                    iterations: 90,
+                    iterations,
                     width: w,
                     height: h,
                     depth: d,

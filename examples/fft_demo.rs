@@ -2,7 +2,7 @@ use num_complex::Complex;
 use std::env;
 use std::f64::consts::PI;
 use std::time::Instant;
-use testfftr::{AccelerateFFT, AccelerateFftError};
+use testfftr::{AccelerateFFT, AccelerateFFTError};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum InputKind {
@@ -134,12 +134,12 @@ fn run_demo() {
 fn run_bench(n: usize, iterations: usize, kind: InputKind) {
     let mut fft = match AccelerateFFT::try_new(n) {
         Ok(plan) => plan,
-        Err(AccelerateFftError::ForwardSetupFailed { .. })
-        | Err(AccelerateFftError::InverseSetupFailed { .. }) => {
+        Err(AccelerateFFTError::ForwardSetupFailed { .. })
+        | Err(AccelerateFFTError::InverseSetupFailed { .. }) => {
             eprintln!("Accelerate does not provide a DFT setup for n={n} on this system.");
             return;
         }
-        Err(AccelerateFftError::InvalidLength) => {
+        Err(AccelerateFFTError::InvalidLength) => {
             eprintln!("n must be greater than zero.");
             return;
         }
@@ -163,12 +163,12 @@ fn run_matrix() {
     for n in lengths {
         let mut fft = match AccelerateFFT::try_new(n) {
             Ok(plan) => plan,
-            Err(AccelerateFftError::ForwardSetupFailed { .. })
-            | Err(AccelerateFftError::InverseSetupFailed { .. }) => {
+            Err(AccelerateFFTError::ForwardSetupFailed { .. })
+            | Err(AccelerateFFTError::InverseSetupFailed { .. }) => {
                 eprintln!("Accelerate does not provide a DFT setup for n={n} on this system.");
                 continue;
             }
-            Err(AccelerateFftError::InvalidLength) => continue,
+            Err(AccelerateFFTError::InvalidLength) => continue,
         };
 
         for kind in InputKind::ALL {
